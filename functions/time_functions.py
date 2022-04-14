@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 
 def add_month(date: pd.Timestamp):
     if date.month < 12:
-        d = str(date.year)+'-'+str(date.month+1)+'-'+str(date.day)+' '+str(date.time)
+        d = str(date.year)+'-'+str(date.month+1)+'-'+str(date.day)+' '+str(date.time())
         return pd.to_datetime(d)
     else:
-        d = str(date.year+1)+'-'+str(1)+'-'+str(date.day)+' '+str(date.time)
+        d = str(date.year+1)+'-'+str(1)+'-'+str(date.day)+' '+str(date.time())
         return pd.to_datetime(d)
 
 def drop_tz(table: pd.DataFrame):  
@@ -16,3 +16,11 @@ def drop_tz(table: pd.DataFrame):
             table.loc[:,i] = table.loc[:,i].dt.tz_localize(None)  
           
     return(table)
+
+def normalize_duration(row):
+    if row.period == 'once':
+        return row.duration / 31
+    else:
+        return row.duration
+
+print(add_month(pd.to_datetime('today')))
