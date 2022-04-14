@@ -22,5 +22,3 @@ def normalize_duration(row):
         return row.duration / 31
     else:
         return row.duration
-
-print(add_month(pd.to_datetime('today')))
